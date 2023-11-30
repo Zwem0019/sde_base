@@ -12,10 +12,10 @@ public class Main {
         ConsoleReader reader = new ConsoleReader();
 
         // execute
-        HZMissionStatement HZIP = new HZMissionStatement();
-
-        writer.writeLines(HZIP.getFirstAmbition());
-//        reader.readLine();
+        HZMissionStatement HzMissionStatement = new HZMissionStatement();
+        writer.storeText(HzMissionStatement.getFirstAmbition());
+        writer.writeText();
+        //        reader.readLine();
 
     }
 }
