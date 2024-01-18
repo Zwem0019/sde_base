@@ -31,7 +31,7 @@ public class SnakeSegment implements Moveable {
     @Override
     public int getHeadX() {
         return this.x;
-
+    }
     @Override
     public int getHeadY() {
         return this.y;

@@ -4,7 +4,7 @@ public class Game {
 
     private GameStates State;
 
-    public Game(GameStates State) {
+    private Game(GameStates State) {
         this.State = State;
     }
 
@@ -12,8 +12,14 @@ public class Game {
         this.State = State;
     }
 
+    public static Game instance;
 
-
+    public static Game getInstance(GameStates State) {
+        if(Game.instance == null) {
+            Game.instance = new Game(State);
+        }
+        return Game.instance;
+    }
 
 
     public void run(){
@@ -21,7 +27,7 @@ public class Game {
     ConsoleReader reader = new ConsoleReader();
 
     Bitmap bitmap = new Bitmap(50, 20);
-    Snake snake = Snake.getInstance(5, 7, 8, Direction.DOWN, bitmap.getWidth(), bitmap.getHeight());
+    Snake snake = new Snake(5, 7, 8, Direction.DOWN, bitmap.getWidth(), bitmap.getHeight());
         snake.moveRight();
 
 
@@ -37,7 +43,7 @@ public class Game {
 
             bitmap.setSnakePosition(snake.getSnake());
             writer.writeBitmapFrame(bitmap);
-            String input = reader.readLine();
+            String input = reader.readLineTimeLimited(2);
             switch (input) {
                 case "a":
                     snake.moveLeft();
@@ -53,6 +59,9 @@ public class Game {
                     break;
                 case "q":
                     writer.write("Exiting...");
+                    break;
+                case null:
+                    snake.move();
                     break;
                 default:
                     writer.write("Invalid input");

@@ -14,15 +14,7 @@ public class Snake implements Moveable {
     private int width;
     private int height;
 
-    public static Snake instance;
-
-    public static Snake getInstance(int x, int y, int length, Direction dir, int width, int height) {
-        if(Snake.instance == null) {
-            Snake.instance = new Snake(x, y, length, dir, width, height);
-        }
-        return Snake.instance;
-    }
-    private Snake(int x, int y, int length, Direction dir, int width, int height) {
+    public Snake(int x, int y, int length, Direction dir, int width, int height) {
         snake = new int[height][width];
         switch (dir) {
             case UP:
@@ -57,6 +49,23 @@ public class Snake implements Moveable {
         this.dir = dir;
         this.xHead = x;
         this.yHead = y;
+    }
+
+    public void move() {
+        switch (this.dir) {
+            case UP:
+                this.moveUp();
+                break;
+            case DOWN:
+                this.moveDown();
+                break;
+            case LEFT:
+                this.moveLeft();
+                break;
+            case RIGHT:
+                this.moveRight();
+                break;
+        }
     }
 
 
