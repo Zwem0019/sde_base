@@ -2,25 +2,38 @@ package edu.hz.io;
 
 public class ConsoleWriter {
 
-    public String[] Text;
+    private int counter = 0;
 
-    public void writeLine(String line) {
-        System.out.println(line);
+    public void writeBitmapFrame(Bitmap bitmap) {
+        System.out.println("Bitmap: " + bitmap.getWidth() + "x" + bitmap.getHeight());
+        for (int i = 0; i < bitmap.getHeight(); i++) {
+            System.out.println();
+            for (int j = 0; j < bitmap.getWidth(); j++) {
+                System.out.print(resolveChar(bitmap.getBitmap()[i][j]));
+                counter++;
+            }
+        }
     }
 
-    public void writeLines(String[] lines) {
-        for (String line : lines)
-            System.out.println(line);
+    public void write(String text) {
+        System.out.println(text);
     }
 
-    // this will store the text in the Text variable
-    public void storeText(String[] text) {
-        this.Text = text;
+    public String resolveChar(int charCode) {
+        return switch (charCode) {
+            case 0 -> ("_");
+            case 1 -> ("E");
+            case 2 -> ("S");
+            case 9 -> ("#");
+            default -> (" ");
+        };
     }
 
-    // this will write the stored text to the console
-    public void writeText() {
-        System.out.println(this.Text.toString());
+    public void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
+
+
 
 }
