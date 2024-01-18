@@ -1,8 +1,8 @@
 package edu.hz.io;
-
+import java.lang.*;
 import java.util.*;
 
-public class Snake implements Moveable{
+public class Snake implements Moveable {
 
     private int xHead;
     private int yHead;
@@ -14,7 +14,15 @@ public class Snake implements Moveable{
     private int width;
     private int height;
 
-    public Snake(int x, int y, int length, Direction dir, int width, int height) {
+    public static Snake instance;
+
+    public static Snake getInstance(int x, int y, int length, Direction dir, int width, int height) {
+        if(Snake.instance == null) {
+            Snake.instance = new Snake(x, y, length, dir, width, height);
+        }
+        return Snake.instance;
+    }
+    private Snake(int x, int y, int length, Direction dir, int width, int height) {
         snake = new int[height][width];
         switch (dir) {
             case UP:
