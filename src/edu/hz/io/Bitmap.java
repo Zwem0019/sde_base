@@ -48,11 +48,11 @@ public class Bitmap {
 
 
     public void setFoodPosition(int x, int y) {
-        this.bitmap[x][y] = 1;
+        this.bitmap[y][x] = 1;
     }
 
     public int getObjectType(int x, int y) {
-        return this.bitmap[x][y];
+        return this.bitmap[y][x];
     }
 
     public int[][] getBitmap() {

@@ -2,7 +2,7 @@ package edu.hz.io;
 import java.lang.*;
 import java.util.*;
 
-public class Snake implements Moveable {
+abstract class Snake implements Moveable {
 
     private int xHead;
     private int yHead;
@@ -10,47 +10,43 @@ public class Snake implements Moveable {
     private int length;
     private int[][] snake;
     private Direction dir;
-
+    protected int speed;
     private int width;
     private int height;
 
     public Snake(int x, int y, int length, Direction dir, int width, int height) {
         snake = new int[height][width];
+        this.tailPositions = new Stack<int[]>();
         switch (dir) {
             case UP:
-                for (int i = 0; i < length; i++) {
-                    snake[y + i][x] = 2;
+                for (int i = length; i > -1; i--) {
+                    tailPositions.push(new int[]{x, y + i});
                 }
                 break;
             case DOWN:
-                for (int i = 0; i < length; i++) {
-                    snake[y - i][x] = 2;
+                for (int i = length; i > -1; i--) {
+                    tailPositions.push(new int[]{x, y - i});
                 }
                 break;
             case LEFT:
-                for (int i = 0; i < length; i++) {
-                    snake[y][x + i] = 2;
+                for (int i = length; i > -1; i--) {
+                    tailPositions.push(new int[]{x + i, y});
                 }
                 break;
             case RIGHT:
-                for (int i = 0; i < length; i++) {
-                    snake[y][x - i] = 2;
+                for (int i = length; i > -1; i--) {
+                    tailPositions.push(new int[]{x - i, y});
                 }
                 break;
         }
         this.length = length;
-        this.tailPositions = new Stack<int[]>();
-        for (int i = 0; i < length; i++) {
-            tailPositions.push(new int[]{x, y});
-        }
         this.width = width;
         this.height = height;
-
         this.dir = dir;
         this.xHead = x;
         this.yHead = y;
     }
-
+    @Override
     public void move() {
         switch (this.dir) {
             case UP:
@@ -115,12 +111,18 @@ public class Snake implements Moveable {
         return this.yHead;
     }
 
+    @Override
+    public int getSpeed(){
+        return this.speed;
+    }
+
     public int[][] getSnake() {
         snake = new int[height][width];
         snake[this.yHead][this.xHead] = 2;
         for (int[] tailPosition : tailPositions) {
             snake[tailPosition[1]][tailPosition[0]] = 2;
         }
+
         return snake;
     }
 }

@@ -21,11 +21,11 @@ public class ConsoleWriter {
 
     public String resolveChar(int charCode) {
         return switch (charCode) {
-            case 0 -> ("_");
-            case 1 -> ("E");
-            case 2 -> ("S");
-            case 9 -> ("#");
-            default -> (" ");
+            case 0 -> (" ");
+            case 1 -> ("○");
+            case 2 -> ("▣");
+            case 9 -> ("■");
+            default -> ("_");
         };
     }
 

@@ -5,6 +5,9 @@ public interface Moveable {
     public void moveRight();
     public void moveUp();
     public void moveDown();
+    public void move();
     public int getHeadX();
     public int getHeadY();
+
+    public int getSpeed();
 }
